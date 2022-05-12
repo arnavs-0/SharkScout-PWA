@@ -2,7 +2,7 @@
 
 # SharkScout PWA
 
-SharkScout is a PWA FRC robot scouting application for FRC team 226. It is an effiencent offline application that allows you to scout robots and teams without having to be connected to the internet by generating QRCodes and submitting it to the Backend Database. It also has the ability to submit data to Firebase when internet connection is available.
+SharkScout is a PWA FRC robot scouting application for FRC team 226. It is a fast offline-first application that allows you to scout robots and teams without having to be connected to the internet by generating QRCodes and submitting it to the Backend Database. It also has the ability to submit data to Firebase when internet connection is available.
 
 Note this app is pairs with the [SharkScout Backend](https://github.com/arnavs-0/SharkScout-Backend) which is a server that stores the data by scanning QR codes.
 
