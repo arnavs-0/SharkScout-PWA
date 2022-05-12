@@ -58,3 +58,5 @@ _Must have created a Firebase Project_
 ✅  Complete
 🚧 Work in Progress
 📝 Planned
+
+This app was used initally by Team 226 during the 2022 Season - Rapid React and will be continously improved and utilized for the upcoming season
