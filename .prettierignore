@@ -1,0 +1,27 @@
+# Ignore artifacts:
+build
+coverage
+.vscode-test/
+out/
+dist/
+test-fixtures/
+node_modules/
+.idea/
+.github/
+public/
+yarn.lock
+setupTests.js
+reportWebVitals.js
+index.js
+App.test.js
+index.css
+.firebase/
+.firebaserc
+.env
+database.rules.json
+firebase.json
+firestore.rules
+firestore.indexes.json
+storage.rules
+src/service-worker.js
+src/serviceWorkerRegistration.js

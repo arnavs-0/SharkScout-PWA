@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+  min-height: calc(100vh - 55px);
+}
+.footer {
+  /*grid-row: 3;*/
+  /*display: flex;*/
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background: #0288d1;
+  padding-top: 5px;
+}
+
+.footer-text {
+  color: white;
+  font-size: 14px;
+}

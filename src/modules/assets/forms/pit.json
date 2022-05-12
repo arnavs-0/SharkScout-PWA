@@ -1,0 +1,66 @@
+{
+  "items": [
+    {
+      "type": "text",
+      "label": "Scouter Name",
+      "exportLabel": "Scouter Name"
+    },
+    {
+      "type": "number",
+      "label": "Team Number",
+      "exportLabel": "Team Number"
+    },
+    {
+      "type": "radio",
+      "label": "Drivetrain",
+      "options": [
+        "Tank",
+        "Mecanum",
+        "Swerve",
+        "H-Drive",
+        "Other"
+      ]
+    },
+    {
+      "type": "text-area",
+      "label": "Preferred Starting Position",
+      "exportLabel": "Shooting Position"
+    },
+    {
+      "type": "text-area",
+      "label": "Preferred Cargo shooting positions",
+      "exportLabel": "Preferred Shooting Position"
+    },
+    {
+      "type": "text-area",
+      "label": "Max Shooting Position",
+      "exportLabel": "Max Shooting Position"
+    },
+    {
+      "type": "boolean",
+      "label": "Climb?"
+    },
+    {
+      "type": "radio",
+      "label": "Highest Rung that Can Be Reached",
+      "options": [
+        "Traversal",
+        "High",
+        "Mid",
+        "Low",
+        "Can't Climb"
+      ]
+    },
+    {
+      "type": "text-area",
+      "label": "Anything changed since last comp?",
+      "exportLabel": "Changes"
+    },
+    {
+      "type": "text-area",
+      "label": "Other Notes",
+      "helperText": "Is there anything unique/special about your robot that we haven't asked about?",
+      "exportLabel": "Notes"
+    }
+  ]
+}
