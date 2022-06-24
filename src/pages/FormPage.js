@@ -7,7 +7,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Paper,
 } from "@material-ui/core";
 import match from "../modules/assets/forms/match.json";
 import pit from "../modules/assets/forms/pit.json";
@@ -15,7 +14,6 @@ import Typography from "@material-ui/core/Typography";
 import {ToastContainer} from "react-toastify";
 import {offlinePit, offlineSubmit, onlineSubmit} from "../api/API"
 import {offline} from "../modules/LocalDB";
-import fieldImg from "../modules/assets/img/field.png";
 
 function requireAll(r) {
     return r.keys().map(r);
@@ -163,9 +161,6 @@ class FormPage extends Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
-                <Paper variant="outlined">
-                    <img style={{width: "100%", height: "100%"}} alt="" src={fieldImg} />
-                </Paper>
 
                 <Typography variant="h5" color="inherit" style={{paddingTop: "25px"}}>
                     {form.name}

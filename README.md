@@ -43,6 +43,7 @@ _Must have created a Firebase Project_
 | Date | 📝 | TBA |
 | Dropdown | ✅ | `dropdown` |
 | Header | ✅ | `header` |
+| Image | ✅ | `image` |
 | Label | ✅ | `label` |
 | Number | ✅ | `number` |
 | Radio Select | ✅ | `radio` |

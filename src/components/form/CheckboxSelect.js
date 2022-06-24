@@ -35,7 +35,7 @@ export default class CheckboxSelect extends Component {
     render() {
 
         return (
-            <div style={{paddingTop: "25px"}}>
+            <div style={{paddingTop: "25px", alignItems: "center", justifyContent: "center"}}>
                 <FormGroup>
                 <FormControlLabel
                     control={

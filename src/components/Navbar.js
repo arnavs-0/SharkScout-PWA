@@ -140,7 +140,7 @@ export default function NavBar() {
 
     const hammerheadLogo = (
         <Typography variant="h6" component="h1" className={logo}>
-            226 Scouting Portal
+            SharkScout PWA
         </Typography>
     );
 

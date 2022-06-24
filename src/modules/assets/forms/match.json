@@ -7,6 +7,13 @@
       "description": "Before Match Starts"
     },
     {
+      "type": "image",
+      "height": "100%",
+      "width": "100%",
+      "imageName": "field.png",
+      "variant": "outlined"
+    },
+    {
       "type": "autocomplete"
     },
     {
