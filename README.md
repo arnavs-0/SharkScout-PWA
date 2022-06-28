@@ -41,9 +41,11 @@ _Must have created a Firebase Project_
 | Autocomplete Select | 🚧 | `autocomplete` |
 | Counter | ✅ | `counter` |
 | Date | 📝 | TBA |
+| Drawable Canvas | 📝 | TBA |
 | Dropdown | ✅ | `dropdown` |
 | Header | ✅ | `header` |
 | Image | ✅ | `image` |
+| Image Select | 📝 | TBA |
 | Label | ✅ | `label` |
 | Number | ✅ | `number` |
 | Radio Select | ✅ | `radio` |
