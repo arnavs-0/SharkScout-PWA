@@ -28,6 +28,7 @@ export default function ReactFirebaseFileUpload() {
     const [snackbar, setSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = React.useState("");
     const [snackbarSeverity, setSnackbarSeverity] = React.useState("success");
+    const [canSubmit, setCanSubmit] = React.useState(true)
 
     const handleChange = (e) => {
         setFiles(e.target.files.length);
@@ -123,6 +124,8 @@ export default function ReactFirebaseFileUpload() {
                 variant="outlined"
                 onChange={(event) => {
                     setTeam(event.target.value);
+                    if (event.target.value !== "" && !(/[^0-9]/.test(event.target.value)))  setCanSubmit(false) 
+                    else setCanSubmit(true)
                 }}
             />
             <br></br>
@@ -137,7 +140,7 @@ export default function ReactFirebaseFileUpload() {
                     onChange={handleChange}
                 />
                 <label htmlFor="contained-button-file">
-                    <Button variant="contained" color="primary" component="span">
+                    <Button variant="contained" color="primary" component="span" disabled={canSubmit}>
                         Upload Files
                     </Button>
                     <Typography variant="p" color="primary" style={{margin: "10px"}}>
@@ -147,7 +150,7 @@ export default function ReactFirebaseFileUpload() {
             </div>
 
             <br></br>
-            <Button variant="contained" color="primary" onClick={handleUpload}>
+            <Button variant="contained" color="primary" disabled={canSubmit} onClick={handleUpload}>
                 Submit to Firebase
             </Button>
             <br/>

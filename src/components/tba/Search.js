@@ -102,6 +102,7 @@ function Search(props) {
                         variant="outlined"
                         size="small"
                         placeholder="ex. 2020misjo"
+                        value={Config.tba_eventid}
                     />
 
                     <Autocomplete
