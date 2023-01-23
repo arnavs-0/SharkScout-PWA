@@ -4,7 +4,8 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import FormPage from "./pages/FormPage";
 import Qrcode from "./pages/QRCode";
 import NavBar from "./components/Navbar";
-import {Container, createTheme, makeStyles, ThemeProvider, Typography} from "@material-ui/core";
+import {Alert, Container, createTheme, CssBaseline, Grid, ThemeProvider, Typography} from "@mui/material";
+import {makeStyles} from "@mui/styles";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home";
@@ -12,35 +13,76 @@ import Search from "./components/tba/Search";
 import ReactFirebaseFileUpload from "./pages/imageUpload";
 import Page404 from "./pages/404";
 import ScoreBreakdown from "./components/tba/ScoreBreakdown";
-import {Alert} from "@material-ui/lab";
 import Config from "./utils/config.json";
 
+export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+
+
 function App() {
-    const darkTheme = createTheme({
-        palette: {
-            type: "light",
-            primary: {
-                main: "#026ca0",
-            },
-            secondary: {
-                main: "#ffffff",
-            },
+    if (localStorage.getItem("darkMode") === null) localStorage.setItem("darkMode", "light");
+    console.log(localStorage.getItem("darkMode"));
+    const [mode, setMode] = React.useState(localStorage.getItem("darkMode"));
+    const colorMode = React.useMemo(
+      () => ({
+        toggleColorMode: () => {
+          setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+          localStorage.setItem("darkMode", mode);
         },
-    });
+      }),
+      [mode],
+    );
+
+    const theme = React.useMemo(
+        () =>
+        createTheme({
+            palette: {
+            mode: mode,
+            ...(mode === 'light' ?
+                {primary: {
+                    main: "#0288d1",
+                },
+                secondary: {
+                    main: "#ffffff",
+                }, 
+                neutral: {
+                    main: "#0288d1",
+                },
+            } :  {
+                    // palette values for dark mode
+                    primary: {
+                        main: "#0288d1",
+                    },
+                    neutral: {
+                        main: "#212121",
+                    },
+                  }),
+            },
+        }),
+        [mode],
+    );
 
     const useStyles = makeStyles({
         root: {
-            color: 'white'
+            color: "white"
         },
+        footer: {
+            backgroundColor: theme.palette.neutral.main,
+            position: "relative",
+            marginTop: "10px",
+            bottom: 0,
+            width: "100%",
+        }
     });
     const styles = useStyles();
     return (
-        <ThemeProvider theme={darkTheme}>
+        <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
             <Router>
                 <div className="App">
                     <ToastContainer/>
                     <NavBar/>
-                    <Alert severity="info">Version: {Config.version}</Alert>
+                    <Alert style={{margin: '10px'}} severity="info">Version: {Config.version}</Alert>
 
                     <Container>
                         <Switch>
@@ -67,14 +109,15 @@ function App() {
                     </Container>
                 </div>
             </Router>
-            <footer className="footer">
+            <Grid className={styles.footer}>
                 <Typography className={styles.root} align="center">
                     <strong> {'\u00A9'} {new Date().getFullYear()} Team 226 - The Hammerheads </strong>
                     <br />
                     <strong>Version:</strong> {Config.version}
                 </Typography>
-            </footer>
+            </Grid>
         </ThemeProvider>
+        </ColorModeContext.Provider>
     );
 }
 

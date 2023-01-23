@@ -1,37 +1,32 @@
-html, body{
-    margin: 0;
-    padding: 0;
-    text-align: center;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
-h1, a{
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
+h1,
+a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
 }
 
-.section{
-    padding: 4rem 2rem;
+.section {
+  padding: 4rem 2rem;
 }
 
-.section .error{
-    font-size: 150px;
-    color: #0288d1;
-    text-shadow:
-            1px 1px 1px #026ca0,
-            2px 2px 1px #026ca0,
-            3px 3px 1px #026ca0,
-            4px 4px 1px #026ca0,
-            5px 5px 1px #026ca0,
-            6px 6px 1px #026ca0,
-            7px 7px 1px #026ca0,
-            8px 8px 1px #026ca0,
-            25px 25px 8px rgba(0,0,0, 0.2);
+.section .error {
+  font-size: 150px;
+  color: #0288d1;
+  text-shadow: 1px 1px 1px #026ca0, 2px 2px 1px #026ca0, 3px 3px 1px #026ca0,
+    4px 4px 1px #026ca0, 5px 5px 1px #026ca0, 6px 6px 1px #026ca0,
+    7px 7px 1px #026ca0, 8px 8px 1px #026ca0, 25px 25px 8px rgba(0, 0, 0, 0.2);
 }
 
-.page{
-    margin: 2rem 0;
-    font-size: 20px;
-    font-weight: 600;
-    color: #444;
+.page {
+  margin: 2rem 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #444;
 }

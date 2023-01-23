@@ -13,13 +13,7 @@
     {
       "type": "radio",
       "label": "Drivetrain",
-      "options": [
-        "Tank",
-        "Mecanum",
-        "Swerve",
-        "H-Drive",
-        "Other"
-      ]
+      "options": ["Tank", "Mecanum", "Swerve", "H-Drive", "Other"]
     },
     {
       "type": "text-area",
@@ -43,13 +37,7 @@
     {
       "type": "radio",
       "label": "Highest Rung that Can Be Reached",
-      "options": [
-        "Traversal",
-        "High",
-        "Mid",
-        "Low",
-        "Can't Climb"
-      ]
+      "options": ["Traversal", "High", "Mid", "Low", "Can't Climb"]
     },
     {
       "type": "text-area",

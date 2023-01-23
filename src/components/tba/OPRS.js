@@ -1,23 +1,19 @@
-import {ListItem, ListItemText} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import { ListItem, ListItemText } from "@mui/material";
+import { styled } from "@mui/styles";
 import React from "react";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: "100%",
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-}));
+const CustomWrap = styled("div")({
+  width: "100%",
+  maxWidth: 360,
+  backgroundColor: "white",
+});
 
 export default function OPRS(props) {
-    const classes = useStyles();
-
-    return (
-        <div className={classes.root}>
-            <ListItem>
-                <ListItemText primary={props.primary} secondary={props.secondary}/>
-            </ListItem>
-        </div>
-    );
+  return (
+    <CustomWrap>
+      <ListItem>
+        <ListItemText primary={props.primary} secondary={props.secondary} />
+      </ListItem>
+    </CustomWrap>
+  );
 }
