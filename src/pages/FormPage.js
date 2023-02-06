@@ -7,6 +7,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Grid,
   Paper,
   Typography,
 } from "@mui/material";
@@ -17,6 +18,7 @@ import { offlinePit, offlineSubmit, onlineSubmit } from "../api/API";
 import { offline } from "../modules/LocalDB";
 import fieldImg from "../modules/assets/img/field.png";
 import { withStyles } from "@mui/styles";
+import Counter from "../components/form/Counter";
 
 function requireAll(r) {
   return r.keys().map(r);
@@ -34,9 +36,9 @@ const FieldTypes = fieldModules.reduce((obj, mod) => {
 const IsHeaderSymbol = Symbol("IsHeaderSymbol");
 
 const styles = {
-    disabledButton: {
-        backgroundColor: 'gray',
-    },
+  disabledButton: {
+    backgroundColor: "gray",
+  },
 };
 
 class FormPage extends Component {
@@ -173,17 +175,11 @@ class FormPage extends Component {
           </DialogActions>
         </Dialog>
 
-        <Paper variant="outlined">
-          <img
-            style={{ width: "100%", height: "100%" }}
-            alt=""
-            src={fieldImg}
-          />
-        </Paper>
-
         <Typography variant="h5" color="inherit" style={{ paddingTop: "25px" }}>
           {form.name}
         </Typography>
+
+        <Grid container spacing={2}>
 
         {form.items.map((item, i) => {
           const Field = FieldTypes[item.type];
@@ -197,17 +193,31 @@ class FormPage extends Component {
                 </h4>
               </div>
             );
-          } else {
+          } else if (item.box) {
             return (
-              <Field
-                onChange={this.state.inputChangeHandlers[i]}
-                value={this.state.inputs[i]}
-                config={item}
-                key={i}
-              />
+              <Grid item xs={6} key={i}>
+                <Field
+                  onChange={this.state.inputChangeHandlers[i]}
+                  value={this.state.inputs[i]}
+                  config={item}
+                  key={i}
+                />
+              </Grid>
+            );
+        }else {
+            return (
+              <Grid item xs={12} key={i}>
+                <Field
+                  onChange={this.state.inputChangeHandlers[i]}
+                  value={this.state.inputs[i]}
+                  config={item}
+                  key={i}
+                />
+              </Grid>
             );
           }
         })}
+        </Grid>
 
         <br />
         <br />

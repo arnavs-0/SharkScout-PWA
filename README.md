@@ -34,31 +34,29 @@ _Must have created a Firebase Project_
 
 ## Components
 
-| Component          | Status | id |
-|--------------------|--------|-----|
-| Boolean (Switch/Toggle)  | ✅  | `boolean` |
-| Checkbox Select | 🚧 | `checkbox` |
-| Autocomplete Select | 🚧 | `autocomplete` |
-| Counter | ✅ | `counter` |
-| Date | 📝 | TBA |
-| Drawable Canvas | 📝 | TBA |
-| Dropdown | ✅ | `dropdown` |
-| Header | ✅ | `header` |
-| Image | ✅ | `image` |
-| Image Select | 📝 | TBA |
-| Label | ✅ | `label` |
-| Number | ✅ | `number` |
-| Radio Select | ✅ | `radio` |
-| Range | 📝  | TBA |
-| Text | ✅ | `text` |
-| Textarea | ✅ | `textarea` |
-| Timer | 📝 | TBA |
-
-
+| Component               | Status | id             |
+| ----------------------- | ------ | -------------- |
+| Boolean (Switch/Toggle) | ✅     | `boolean`      |
+| Checkbox Select         | 🚧     | `checkbox`     |
+| Autocomplete Select     | 🚧     | `autocomplete` |
+| Counter                 | ✅     | `counter`      |
+| Date                    | 📝     | TBA            |
+| Drawable Canvas         | 📝     | TBA            |
+| Dropdown                | ✅     | `dropdown`     |
+| Header                  | ✅     | `header`       |
+| Image                   | ✅     | `image`        |
+| Image Select            | 📝     | TBA            |
+| Label                   | ✅     | `label`        |
+| Number                  | ✅     | `number`       |
+| Radio Select            | ✅     | `radio`        |
+| Range                   | 📝     | TBA            |
+| Text                    | ✅     | `text`         |
+| Textarea                | ✅     | `textarea`     |
+| Timer                   | 📝     | TBA            |
 
 ### Key
 
-✅  Complete
+✅ Complete
 🚧 Work in Progress
 📝 Planned
 

@@ -12,7 +12,7 @@ import {
   setUid,
   uid,
 } from "../modules/LocalDB";
-import LoadingButton from '@mui/lab/LoadingButton';
+import LoadingButton from "@mui/lab/LoadingButton";
 import { goToForm, goToUpload } from "../modules/Router";
 import { ToastContainer } from "react-toastify";
 import firebase from "firebase";
@@ -25,7 +25,6 @@ class Home extends Component {
     if (!uid) {
       setUid(uuidv4());
     }
-    
   }
 
   render() {
@@ -78,35 +77,28 @@ class Home extends Component {
           <Grid item xs={4} sx={{ justifyContent: "center" }}>
             <Offline>
               <FormSelection
-                main="Offline 2022 Match Scouting"
+                main="Offline 2023 Match Scouting"
                 second="In-Person Match Scouting"
                 onClick={() => handleClick("offline")}
               />
               <FormSelection
-                main="Offline 2022 Pit Scouting"
+                main="Offline 2023 Pit Scouting"
                 second="In-Person Pit Scouting"
                 onClick={() => handleClick("offlinePit")}
               />
             </Offline>
             <Online>
               <FormSelection
-                main="Goonettes Match Scouting"
+                main="Online 2023 Match Scouting"
                 second="In-Person Match Scouting"
                 onClick={() => handleClick("offline")}
               />
               <FormSelection
-                main="Offline 2022 Pit Scouting"
+                main="Offline 2023 Pit Scouting"
                 divider
                 second="In-Person Pit Scouting"
                 onClick={() => handleClick("offlinePit")}
               />
-              {/* <FormSelection
-                            main="Online 2022 Match Scouting"
-                            second="Online Match Scouting"
-                            online
-                            onClick={() => handleClick("online")}
-                        />
-                        <br/> */}
               <Typography
                 variant="p"
                 style={{ textAlign: "center", margin: "30px" }}
@@ -120,7 +112,7 @@ class Home extends Component {
                 onClick={handleUpload}
               />
               {login ? <Button onClick={handleSignOut}>Logout</Button> : null}
-              <TBALoader/>
+              <TBALoader />
             </Online>
           </Grid>
         </Grid>

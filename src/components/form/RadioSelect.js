@@ -36,6 +36,7 @@ export default class RadioSelect extends Component {
           <FormLabel
             color="neutral"
             style={{ fontWeight: "bold", marginBottom: "10px" }}
+            focused={false}
           >
             {config.label}
           </FormLabel>

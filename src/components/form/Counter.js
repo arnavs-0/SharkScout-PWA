@@ -38,11 +38,11 @@ export default class Counter extends Component {
 
     return (
       <div
-        style={{
-          paddingTop: "0.5em",
-          marginTop: "15px",
-          marginBottom: "15px",
-        }}
+        // style={{
+        //   paddingTop: "0.5em",
+        //   marginTop: "5px",
+        //   marginBottom: "5px",
+        // }}
       >
         <p>
           <strong>{config.label}</strong>

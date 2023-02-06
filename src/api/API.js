@@ -6,67 +6,73 @@ import { label, pitLabel } from "../utils/Label";
 import Config from "../utils/config.json";
 
 export function offlineSubmit(data) {
-  //Auton Points
-  // TODO: Create Schema to calculate points
-  let auton_bp = data[4] * 2;
-  let auton_op = data[5] * 4;
-  let auton_total = auton_bp + auton_op;
+  console.log(data);
 
-  // //TeleOp Points
-  let teleop_bp = data[6];
-  let teleop_up = data[7] * 2;
-
-  let teleop_total = teleop_bp + teleop_up;
-
-  // //Endgame
-  let endgame;
-  if (data[10] === "Traversal") {
-    endgame = 15;
-  } else if (data[10] === "High") {
-    endgame = 10;
-  } else if (data[10] === "Mid") {
-    endgame = 6;
-  } else if (data[10] === "Low") {
-    endgame = 10;
-  } else {
-    endgame = 0;
-  }
-
-  let total = auton_total + teleop_total + endgame;
-
-  data.push(auton_total, teleop_total, endgame, total);
-
-  var reformat = {};
-
-  reformat[label[0]] = localStorage.getItem("uid");
-  if (data[0].team !== undefined) {
-    reformat[label[1]] = data[0].team;
-    reformat[label[2]] = data[0].match;
-    reformat[label[3]] = data[0].alliance;
-  } else {
-    reformat[label[1]] = data[0];
-    reformat[label[2]] = data[1];
-    reformat[label[3]] = data[2];
-  }
-
-  for (let i = 0; i < data.length - 1; i++) {
-    reformat[label[i + 4]] = data[i + 3];
-  }
-
-  console.log(reformat);
-  setQRCode(JSON.stringify(reformat));
-  const fileName = "file";
-  const json = JSON.stringify(reformat);
-  const blob = new Blob([json], { type: "application/json" });
-  const href = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = href;
-  link.download = fileName + ".json";
-  document.body.appendChild(link);
-  // link.click();
-  removeItem("offline");
-  goToQRCode();
+  
 }
+
+// export function offlineSubmit(data) {
+//   //Auton Points
+//   // TODO: Create Schema to calculate points
+//   let auton_bp = data[4] * 2;
+//   let auton_op = data[5] * 4;
+//   let auton_total = auton_bp + auton_op;
+
+//   // //TeleOp Points
+//   let teleop_bp = data[6];
+//   let teleop_up = data[7] * 2;
+
+//   let teleop_total = teleop_bp + teleop_up;
+
+//   // //Endgame
+//   let endgame;
+//   if (data[10] === "Traversal") {
+//     endgame = 15;
+//   } else if (data[10] === "High") {
+//     endgame = 10;
+//   } else if (data[10] === "Mid") {
+//     endgame = 6;
+//   } else if (data[10] === "Low") {
+//     endgame = 10;
+//   } else {
+//     endgame = 0;
+//   }
+
+//   let total = auton_total + teleop_total + endgame;
+
+//   data.push(auton_total, teleop_total, endgame, total);
+
+//   var reformat = {};
+
+//   reformat[label[0]] = localStorage.getItem("uid");
+//   if (data[0].team !== undefined) {
+//     reformat[label[1]] = data[0].team;
+//     reformat[label[2]] = data[0].match;
+//     reformat[label[3]] = data[0].alliance;
+//   } else {
+//     reformat[label[1]] = data[0];
+//     reformat[label[2]] = data[1];
+//     reformat[label[3]] = data[2];
+//   }
+
+//   for (let i = 0; i < data.length - 1; i++) {
+//     reformat[label[i + 4]] = data[i + 3];
+//   }
+
+//   console.log(reformat);
+//   setQRCode(JSON.stringify(reformat));
+//   const fileName = "file";
+//   const json = JSON.stringify(reformat);
+//   const blob = new Blob([json], { type: "application/json" });
+//   const href = URL.createObjectURL(blob);
+//   const link = document.createElement("a");
+//   link.href = href;
+//   link.download = fileName + ".json";
+//   document.body.appendChild(link);
+//   // link.click();
+//   removeItem("offline");
+//   goToQRCode();
+// }
 
 export function onlineSubmit(data) {
   const db = firebase.firestore();

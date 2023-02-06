@@ -1,12 +1,12 @@
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import * as React from "react";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 
 const filter = createFilterOptions();
 
@@ -16,15 +16,15 @@ export default function Auto() {
 
   const handleClose = () => {
     setDialogValue({
-      title: '',
-      year: '',
+      title: "",
+      year: "",
     });
     toggleOpen(false);
   };
 
   const [dialogValue, setDialogValue] = React.useState({
-    title: '',
-    year: '',
+    title: "",
+    year: "",
   });
 
   const handleSubmit = (event) => {
@@ -41,20 +41,20 @@ export default function Auto() {
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
-          if (typeof newValue === 'string') {
+          if (typeof newValue === "string") {
             // timeout to avoid instant validation of the dialog's form.
             setTimeout(() => {
               toggleOpen(true);
               setDialogValue({
                 title: newValue,
-                year: '',
+                year: "",
               });
             });
           } else if (newValue && newValue.inputValue) {
             toggleOpen(true);
             setDialogValue({
               title: newValue.inputValue,
-              year: '',
+              year: "",
             });
           } else {
             setValue(newValue);
@@ -63,7 +63,7 @@ export default function Auto() {
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
 
-          if (params.inputValue !== '') {
+          if (params.inputValue !== "") {
             filtered.push({
               inputValue: params.inputValue,
               team: `Add new match`,
@@ -73,27 +73,44 @@ export default function Auto() {
           return filtered;
         }}
         id="free-solo-dialog-demo"
-        options={JSON.parse(localStorage.getItem('matches'))}
+        options={JSON.parse(localStorage.getItem("matches"))}
         getOptionLabel={(option) => {
-            if (option.match !== undefined) {
-                return (
-                  "Q" +
-                  option.match.toString() +
-                  " " +
-                  option.team +
-                  " " +
-                  option.alliance
-                );
-              }
-            return option.team;
+          if (option.match !== undefined) {
+            return (
+              "Q" +
+              option.match.toString() +
+              " " +
+              option.team +
+              " " +
+              option.alliance
+            );
+          }
+          return option.team;
         }}
         selectOnFocus
         clearOnBlur
         handleHomeEndKeys
-        renderOption={(props, option) => <li {...props}> {option.match !== undefined ? "Q" : "" }{option.match} {option.alliance} {option.team}</li>}
+        renderOption={(props, option) => (
+          <li {...props}>
+            {" "}
+            {option.match !== undefined ? "Q" : ""}
+            {option.match} {option.alliance} {option.team}
+          </li>
+        )}
         sx={{ width: 300 }}
         freeSolo
-        renderInput={(params) => <TextField {...params} label="Setup" helperText="Type in match number ex. Q1"/>}
+        renderInput={(params) => (
+          <TextField
+            InputProps={{
+                inputProps: {
+                    style: { textAlign: "right" },
+                }
+            }}
+            {...params}
+            label="Setup"
+            helperText="Type in match number ex. Q1"
+          />
+        )}
       />
       <Dialog open={open} onClose={handleClose}>
         <form onSubmit={handleSubmit}>

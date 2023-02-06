@@ -187,7 +187,7 @@ export default function NavBar() {
       className={logo}
       style={{ fontWeight: "bold" }}
     >
-      SharkScout PWA
+      SharkScout 🦈
     </Typography>
   );
 

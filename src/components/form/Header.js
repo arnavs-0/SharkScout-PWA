@@ -6,7 +6,7 @@ export default class Header extends Component {
     const config = this.props.config;
 
     return (
-      <div style={{ paddingTop: "25px", paddingBottom: "5px" }}>
+      <div style={{ paddingTop: "5px", paddingBottom: "5px" }}>
         <Typography variant={config.variant} color="inherit">
           {config.label}
         </Typography>

@@ -9,9 +9,11 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import {
+  Container,
   FormControl,
   FormControlLabel,
   FormLabel,
+  Grid,
   Radio,
   RadioGroup,
 } from "@mui/material";
@@ -41,8 +43,6 @@ export default class Completion extends Component {
       });
     };
 
-  
-
     this.handleSubmit = (event, newValue) => {
       event.preventDefault();
       this.setState(
@@ -65,7 +65,14 @@ export default class Completion extends Component {
 
     this.handleRender = (option) => {
       if (option.match !== undefined) {
-        return "Q" + option.match.toString() + " " + option.team + " " + option.alliance;
+        return (
+          "Q" +
+          option.match.toString() +
+          " " +
+          option.team +
+          " " +
+          option.alliance
+        );
       }
       return option.team;
     };
@@ -87,14 +94,29 @@ export default class Completion extends Component {
 
   render() {
     return (
-      <React.Fragment style={{ paddingTop: "0.5em", justifyContent: "center" }}>
-        <div style={{ alignItems: "center", justifyContent: "center" }}>
-          {/* <Autocomplete
-            value={this.state.value}
-            onChange={(event, newValue) => {
-              if (typeof newValue === "string") {
-                // timeout to avoid instant validation of the dialog's form.
-                setTimeout(() => {
+      <React.Fragment>
+        <div style={{ display: "flex", paddingTop: "0.5em", alignItems: "center", justifyContent: "center" }}>
+        <Container>
+        <Grid container justifyContent="center" alignItems="center" spacing={2}>
+        <Grid item xs>
+            <Autocomplete
+              value={this.state.value}
+              onChange={(event, newValue) => {
+                if (typeof newValue === "string") {
+                  // timeout to avoid instant validation of the dialog's form.
+                  setTimeout(() => {
+                    this.setState(() => {
+                      return {
+                        open: true,
+                        dialogValue: {
+                          team: "",
+                          match: "",
+                          alliance: "",
+                        },
+                      };
+                    });
+                  });
+                } else if (newValue && newValue.inputValue) {
                   this.setState(() => {
                     return {
                       open: true,
@@ -105,128 +127,69 @@ export default class Completion extends Component {
                       },
                     };
                   });
-                });
-              } else if (newValue && newValue.inputValue) {
-                this.setState(() => {
-                  return {
-                    open: true,
-                    dialogValue: {
-                      team: "",
-                      match: "",
-                      alliance: "",
-                    },
-                  };
-                });
-              } else {
-                this.props.onChange(newValue);
-                this.setState(() => {
-                  return {
-                    value: newValue,
-                  };
-                });
-              }
-            }}
-            filterOptions={(options, params) => {
-              const filtered = filter(options, params);
+                } else {
+                  this.props.onChange(newValue);
+                  this.setState(() => {
+                    return {
+                      value: newValue,
+                    };
+                  });
+                }
+              }}
+              filterOptions={(options, params) => {
+                const filtered = filter(options, params);
 
-              if (params.inputValue !== "") {
-                filtered.push({
-                  inputValue: "Add New Team",
-                  team: `Add New Team`,
-                });
-              }
-              return filtered;
-            }}
-            id="free-solo-dialog-demo"
-            options={JSON.parse(localStorage.getItem("matches"))}
-            getOptionLabel={(option) => this.handleOption(option)}
-            selectOnFocus
-            clearOnBlur
-            handleHomeEndKeys
-            renderOption={(option) => (option.match + " " + option.team + " " + option.alliance)}
-            style={{ width: 300, justifyContent: "center" }}
-            freeSolo
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Setup"
-                helperText="Type in match number ex. Q1"
-                variant="outlined"
-              />
-            )}
-          /> */}
-          <Autocomplete
-        value={this.state.value}
-        onChange={(event, newValue) => {
-          if (typeof newValue === "string") {
-            // timeout to avoid instant validation of the dialog's form.
-            setTimeout(() => {
-              this.setState(() => {
-                return {
-                  open: true,
-                  dialogValue: {
-                    team: "",
-                    match: "",
-                    alliance: "",
-                  },
-                };
-              });
-            });
-          } else if (newValue && newValue.inputValue) {
-            this.setState(() => {
-              return {
-                open: true,
-                dialogValue: {
-                  team: "",
-                  match: "",
-                  alliance: "",
-                },
-              };
-            });
-          } else {
-            this.props.onChange(newValue);
-            this.setState(() => {
-              return {
-                value: newValue,
-              };
-            });
-          }
-        }}
-        filterOptions={(options, params) => {
-          const filtered = filter(options, params);
+                if (params.inputValue !== "") {
+                  filtered.push({
+                    inputValue: `Add new match`,
+                    team: `Add new match`,
+                  });
+                }
 
-          if (params.inputValue !== '') {
-            filtered.push({
-              inputValue: `Add new match`,
-              team: `Add new match`,
-            });
-          }
-
-          return filtered;
-        }}
-        id="free-solo-dialog-demo"
-        options={JSON.parse(localStorage.getItem('matches'))}
-        getOptionLabel={(option) => {
-            if (option.match !== undefined) {
-                return (
-                  "Q" +
-                  option.match.toString() +
-                  " " +
-                  option.team +
-                  " " +
-                  option.alliance
-                );
-              }
-            return option.team;
-        }}
-        selectOnFocus
-        clearOnBlur
-        handleHomeEndKeys
-        renderOption={(props, option) => <li {...props}> {option.match !== undefined ? "Q" : "" }{option.match} {option.alliance} {option.team}</li>}
-        sx={{ width: 300 }}
-        freeSolo
-        renderInput={(params) => <TextField {...params} label="Setup" helperText="Type in match number ex. Q1"/>}
-      />
+                return filtered;
+              }}
+              id="free-solo-dialog-demo"
+              options={JSON.parse(localStorage.getItem("matches"))}
+              getOptionLabel={(option) => {
+                if (option.match !== undefined) {
+                  return (
+                    "Q" +
+                    option.match.toString() +
+                    " " +
+                    option.team +
+                    " " +
+                    option.alliance
+                  );
+                }
+                return option.team;
+              }}
+              selectOnFocus
+              clearOnBlur
+              handleHomeEndKeys
+              renderOption={(props, option) => (
+                <li {...props}>
+                  {" "}
+                  {option.match !== undefined ? "Q" : ""}
+                  {option.match} {option.alliance} {option.team}
+                </li>
+              )}
+              sx={{ width: 300, display: 'inline-block', margin: '0 auto' }}
+              freeSolo
+              center
+              renderInput={(params) => (
+                <Grid item xs>
+                <TextField
+                  {...params}
+                  margin="normal"
+                  label="Setup"
+                  helperText="Type in match number ex. Q1"
+                />
+                </Grid>
+              )}
+            />
+            </Grid>
+            </Grid>
+          </Container>
           <Dialog
             open={this.state.open}
             onClose={this.handleClose}
@@ -336,9 +299,14 @@ export default class Completion extends Component {
             </form>
           </Dialog>
         </div>
+        
       </React.Fragment>
     );
   }
 }
 
 export const id = "comp";
+
+export function resolveSubmissionValue(config, value) {
+  return value;
+}
