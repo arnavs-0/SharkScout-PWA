@@ -7,8 +7,55 @@ import Config from "../utils/config.json";
 
 export function offlineSubmit(data) {
   console.log(data);
+  let autoClimb = 0;
+  if (data[7] === "Docked") {
+    autoClimb = 8;
+  } else if (data[7] === "Engaged") {
+    autoClimb = 12;
+  }
 
-  
+  let endClimb = 0;
+  if (data[16] === "Docked") {
+    endClimb = 6;
+  } else if (data[16] === "Engaged") {
+    endClimb = 10;
+  }
+  let auton = ((data[3] + data[4]) * 3) + ((data[5] + data[6]) * 4) + ((data[7] + data[8]) * 6) + autoClimb;
+  let teleop = ((data[11] + data[12]) * 2) + ((data[13] + data[14])) * 3  + (data[15] + data[16]) * 5 + endClimb;
+
+  data.push(auton, teleop, auton + teleop);
+
+  var reformat = {};
+  reformat[label[0]] = localStorage.getItem("uid");
+  if (data[0].team !== undefined) {
+    reformat[label[1]] = data[0].team;
+    reformat[label[2]] = data[0].match;
+    reformat[label[3]] = data[0].alliance;
+  } else {
+    reformat[label[1]] = data[0];
+    reformat[label[2]] = data[1];
+    reformat[label[3]] = data[2];
+  }
+
+  for (let i = 0; i < data.length - 1; i++) {
+    reformat[label[i + 4]] = data[i + 1];
+  }
+
+  console.log(reformat);
+  setQRCode(JSON.stringify(reformat));
+  const fileName = "file";
+  const json = JSON.stringify(reformat);
+  const blob = new Blob([json], { type: "application/json" });
+  const href = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = href;
+  link.download = fileName + ".json";
+  document.body.appendChild(link);
+  // link.click();
+  removeItem("offline");
+  goToQRCode();
+
+  // 
 }
 
 // export function offlineSubmit(data) {

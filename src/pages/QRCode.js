@@ -36,6 +36,19 @@ class Qrcode extends Component {
       goToHome();
     }
 
+    function handleClickDownload() {
+      const fileName = "file";
+      const json = qrcode;
+      const blob = new Blob([json], { type: "application/json" });
+      const href = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = href;
+      link.download = fileName + ".json";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
     const handleClickOpen = () => {
       this.setState({ open: true });
     };
@@ -65,6 +78,14 @@ class Qrcode extends Component {
           variant="contained"
           color="primary"
           style={{ margin: "15px" }}
+          onClick={handleClick}
+          >
+            Download
+          </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ margin: "15px" }}
           onClick={handleClickOpen}
         >
           Go Home
@@ -82,7 +103,7 @@ class Qrcode extends Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClick} color="primary">
+            <Button onClick={handleClickDownload} color="primary">
               Yes
             </Button>
             <Button
