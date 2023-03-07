@@ -8,16 +8,16 @@ import Config from "../utils/config.json";
 export function offlineSubmit(data) {
   console.log(data);
   let autoClimb = 0;
-  if (data[7] === "Docked") {
+  if (data[9] === "Docked") {
     autoClimb = 8;
-  } else if (data[7] === "Engaged") {
+  } else if (data[9] === "Engaged") {
     autoClimb = 12;
   }
 
   let endClimb = 0;
-  if (data[16] === "Docked") {
+  if (data[18] === "Docked") {
     endClimb = 6;
-  } else if (data[16] === "Engaged") {
+  } else if (data[18] === "Engaged") {
     endClimb = 10;
   }
   let auton = ((data[3] + data[4]) * 3) + ((data[5] + data[6]) * 4) + ((data[7] + data[8]) * 6) + autoClimb;
@@ -28,8 +28,8 @@ export function offlineSubmit(data) {
   var reformat = {};
   reformat[label[0]] = localStorage.getItem("uid");
   if (data[0].team !== undefined) {
-    reformat[label[1]] = data[0].team;
-    reformat[label[2]] = data[0].match;
+    reformat[label[1]] = data[0].match;
+    reformat[label[2]] = data[0].team;
     reformat[label[3]] = data[0].alliance;
   } else {
     reformat[label[1]] = data[0];
@@ -41,7 +41,7 @@ export function offlineSubmit(data) {
     reformat[label[i + 4]] = data[i + 1];
   }
 
-  console.log(reformat);
+  //console.log(reformat);
   setQRCode(JSON.stringify(reformat));
   const fileName = "file";
   const json = JSON.stringify(reformat);
@@ -165,7 +165,7 @@ export function onlineSubmit(data) {
   }
 
   for (let i = 0; i < data.length - 1; i++) {
-    reformat[label[i + 4]] = data[i + 1];
+    reformat[label[i + 4]] = data[i + 3];
   }
 
   db.collection(Config.firebase_node)

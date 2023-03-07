@@ -28,7 +28,8 @@ export default function TBALoader() {
   async function handleClick() {
     if (
       localStorage.getItem("matches") === null ||
-      localStorage.getItem("matches") === "[]"
+      localStorage.getItem("matches") === "[]" ||
+      localStorage.getItem("event_code") !== Config.tba_eventid
     ) {
       setLoading(true);
       let config = {
@@ -119,6 +120,7 @@ export default function TBALoader() {
           localStorage.setItem("matches", JSON.stringify(reformatted));
           localStorage.setItem("event_code", Config.tba_eventid);
           localStorage.removeItem("teams");
+          window.dispatchEvent(new Event('teams'))
           loadMatches("Loaded ✅");
           setLoading(false);
           setDisabled(true);

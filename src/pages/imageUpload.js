@@ -3,12 +3,10 @@ import firebase from "firebase";
 import {
   Button,
   LinearProgress,
-  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import MuiAlert from "@mui/material/Alert";
 import { goToHome } from "../modules/Router";
 
 // TODO: Fix
@@ -23,19 +21,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 export default function ReactFirebaseFileUpload() {
   const [images, setImages] = useState([]);
-  const [urls, setUrls] = useState([]);
   const [progress, setProgress] = useState(0);
   const [team, setTeam] = useState("");
   const [files, setFiles] = useState(0);
-  const [snackbar, setSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = React.useState("success");
   const [canSubmit, setCanSubmit] = React.useState(true);
 
   const handleChange = (e) => {
@@ -47,9 +39,6 @@ export default function ReactFirebaseFileUpload() {
     }
   };
 
-  function handleClose() {
-    setSnackbar(false);
-  }
 
   const storage = firebase.storage();
   const db = firebase.database();
@@ -64,7 +53,7 @@ export default function ReactFirebaseFileUpload() {
     }
     images.forEach((image) => {
       const uploadTask = storage
-        .ref(`msc-images/${number}/${image.name}`)
+        .ref(`wsu-images/${number}/${image.name}`)
         .put(image);
       promises.push(uploadTask);
       uploadTask.on(
@@ -80,16 +69,16 @@ export default function ReactFirebaseFileUpload() {
         },
         async () => {
           await storage
-            .ref(`msc-images/${number}`)
+            .ref(`wsu-images/${number}`)
             .child(image.name)
             .getDownloadURL()
             .then((urls) => {
               db.ref(
-                `msc-images/${number}/${Math.round(Math.random() * 1000)}`
+                `wsu-images/${number}/${Math.round(Math.random() * 1000)}`
               ).set({
                 url: urls,
               });
-              setUrls((prevState) => [...prevState, urls]);
+
             });
         }
       );
@@ -98,17 +87,13 @@ export default function ReactFirebaseFileUpload() {
     Promise.all(promises)
       .then(() => {
         setSnackbarMessage("All Images Uploaded to Firebase");
-        setSnackbar(true);
       })
-      .catch((err) => {
+      .catch(() => {
         setSnackbarMessage("Error Uploading Images");
-        setSnackbarSeverity("error");
-        setSnackbar(true);
       });
   };
 
-  console.log("images: ", images);
-  console.log("urls", urls);
+
 
   const classes = useStyles();
   return (
@@ -170,28 +155,13 @@ export default function ReactFirebaseFileUpload() {
       </Button>
       <br />
       <br />
-      {urls.map((url, i) => (
-        <img
-          key={i}
-          style={{ width: "100%", height: "100%" }}
-          src={url || "http://via.placeholder.com/300"}
-          alt="firebase-uploaded"
-        />
-      ))}
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        open={snackbar}
-        autoHideDuration={6000}
-        onClose={handleClose}
+      <Typography
+      style={{ fontWeight: "bold" }}
+        variant="p"
+        color="primary"
       >
-        <Alert
-          onClose={handleClose}
-          severity={snackbarSeverity}
-          sx={{ width: "100%" }}
-        >
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
+        {snackbarMessage}
+      </Typography>
     </div>
   );
 }

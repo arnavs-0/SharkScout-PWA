@@ -78,7 +78,7 @@ class Qrcode extends Component {
           variant="contained"
           color="primary"
           style={{ margin: "15px" }}
-          onClick={handleClick}
+          onClick={handleClickDownload}
           >
             Download
           </Button>
@@ -103,7 +103,7 @@ class Qrcode extends Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClickDownload} color="primary">
+            <Button onClick={handleClick} color="primary">
               Yes
             </Button>
             <Button

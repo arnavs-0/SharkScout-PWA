@@ -4,8 +4,6 @@ import fieldImg from "../../modules/assets/img/field.png";
 
 export default class FieldImage extends Component {
   render() {
-    const config = this.props.config;
-
     return (
       <div style={{ paddingTop: "25px", paddingBottom: "5px" }}>
         <Paper

@@ -17,7 +17,6 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import { teams } from "../../modules/assets/teams";
 // TODO: Add flexible multiple autocomplete for Schema
 const filter = createFilterOptions();
 export default class Completion extends Component {

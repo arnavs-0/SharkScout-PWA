@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import {
   Button,
   CircularProgress,
@@ -8,7 +8,6 @@ import {
   DialogContentText,
   DialogTitle,
   Grid,
-  Paper,
   Typography,
 } from "@mui/material";
 import match from "../modules/assets/forms/match.json";
@@ -16,9 +15,8 @@ import pit from "../modules/assets/forms/pit.json";
 import { ToastContainer } from "react-toastify";
 import { offlinePit, offlineSubmit, onlineSubmit } from "../api/API";
 import { offline } from "../modules/LocalDB";
-import fieldImg from "../modules/assets/img/field.png";
 import { withStyles } from "@mui/styles";
-import Counter from "../components/form/Counter";
+import FieldImage from "../components/form/FieldImage";
 
 function requireAll(r) {
   return r.keys().map(r);
@@ -178,6 +176,8 @@ class FormPage extends Component {
         <Typography variant="h5" color="inherit" style={{ paddingTop: "25px" }}>
           {form.name}
         </Typography>
+
+        <FieldImage />
 
         <Grid container spacing={2}>
 
