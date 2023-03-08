@@ -8,13 +8,13 @@
       },
       {
         "type": "number",
-        "label": "Team Number",
-        "exportLabel": "Team Number"
+        "label": "Match Number",
+        "exportLabel": "Match Number"
       },
       {
         "type": "number",
-        "label": "Match Number",
-        "exportLabel": "Match Number"
+        "label": "Team Number",
+        "exportLabel": "Team Number"
       },
       {
         "type": "boolean",
