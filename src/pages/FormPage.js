@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import { Component } from "react";
 import {
   Button,
   CircularProgress,
@@ -7,210 +7,244 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from "@material-ui/core";
+  Grid,
+  Typography,
+} from "@mui/material";
 import match from "../modules/assets/forms/match.json";
 import pit from "../modules/assets/forms/pit.json";
-import Typography from "@material-ui/core/Typography";
-import {ToastContainer} from "react-toastify";
-import {offlinePit, offlineSubmit, onlineSubmit} from "../api/API"
-import {offline} from "../modules/LocalDB";
+import tba from "../modules/assets/forms/tba.json";
+import { ToastContainer } from "react-toastify";
+import { offlinePit, offlineSubmit, onlineSubmit } from "../api/API";
+import { offline } from "../modules/LocalDB";
+import { withStyles } from "@mui/styles";
+import FieldImage from "../components/form/FieldImage";
 
 function requireAll(r) {
-    return r.keys().map(r);
+  return r.keys().map(r);
 }
 
 const fieldModules = requireAll(
-    require.context("../components/form", true, /\.js?$/)
+  require.context("../components/form", true, /\.js?$/)
 );
 const FieldTypes = fieldModules.reduce((obj, mod) => {
-    obj[mod.id] = mod.default;
-    obj[mod.id].resolveSubmissionValue = mod.resolveSubmissionValue;
-    return obj;
+  obj[mod.id] = mod.default;
+  obj[mod.id].resolveSubmissionValue = mod.resolveSubmissionValue;
+  return obj;
 }, {});
 
 const IsHeaderSymbol = Symbol("IsHeaderSymbol");
 
+const styles = {
+  disabledButton: {
+    backgroundColor: "gray",
+  },
+};
+
 class FormPage extends Component {
-    constructor(props) {
-        super(props);
-        let form;
-        if (offline === "online") {
-            form = match;
-        } else if (offline === "offlinePit") {
-            form = pit;
-        } else if (offline === "offline") {
-            form = match;
-        }
-        this.handleFieldChange = (i, new_value) => {
-            const inputs = this.state.inputs.concat();
-            inputs[i] = new_value;
-            this.setState({
-                inputs: inputs,
-                exitWithoutSaving: true,
-            });
-        };
-        this.state = {
-            inputs: form.items.map(() => undefined),
-            inputChangeHandlers: form.items.map((item, i) =>
-                this.handleFieldChange.bind(this, i)
-            ),
-            exitWithoutSaving: false,
-            loading: true,
-            open: false,
-        };
-        this.getSubmitData = () => {
-            return form.items
-                .map((item, i) => {
-                    if (item.type === "header") return IsHeaderSymbol;
-                    const Field = FieldTypes[item.type];
+  constructor(props) {
+    super(props);
+    let form;
+    if (offline === "online") {
+      form = match;
+    } else if (offline === "offlinePit") {
+      form = pit;
+    } else if (offline === "offline") {
+      form = match;
+    } else if (offline === "tba"){
+      form = tba;
+    }
+    this.handleFieldChange = (i, new_value) => {
+      const inputs = this.state.inputs.concat();
+      inputs[i] = new_value;
+      this.setState({
+        inputs: inputs,
+        exitWithoutSaving: true,
+      });
+    };
+    this.state = {
+      inputs: form.items.map(() => undefined),
+      inputChangeHandlers: form.items.map((item, i) =>
+        this.handleFieldChange.bind(this, i)
+      ),
+      exitWithoutSaving: false,
+      loading: true,
+      open: false,
+    };
+    this.getSubmitData = () => {
+      return form.items
+        .map((item, i) => {
+          if (item.type === "header") return IsHeaderSymbol;
+          const Field = FieldTypes[item.type];
 
-                    if (!Field) {
-                        return null;
-                    } else {
-                        if (Field.resolveSubmissionValue) {
-                            return Field.resolveSubmissionValue(item, this.state.inputs[i]);
-                        } else {
-                            return this.state.inputs[i];
-                        }
-                    }
-                })
-                .filter((x) => x !== IsHeaderSymbol);
-        };
-
-        this.handleSubmit = () => {
-            if (offline === "offline") {
-                console.log(this.getSubmitData());
-                var myData = this.getSubmitData();
-                console.log(myData[0]);
-                offlineSubmit(myData);
-            } else if (offline === "online") {
-                this.state.loading = true;
-                const myData = this.getSubmitData();
-                onlineSubmit(myData);
-            } else if (offline === "offlinePit") {
-                const myData = this.getSubmitData();
-                offlinePit(myData);
+          if (!Field) {
+            return null;
+          } else {
+            if (Field.resolveSubmissionValue) {
+              return Field.resolveSubmissionValue(item, this.state.inputs[i]);
             } else {
-                window.location.replace("/");
+              return this.state.inputs[i];
             }
-        };
+          }
+        })
+        .filter((x) => x !== IsHeaderSymbol);
+    };
+
+    this.handleSubmit = () => {
+      if (offline === "offline" || offline === "tba") {
+        console.log(this.getSubmitData());
+        var myData = this.getSubmitData();
+        console.log(myData[0]);
+        offlineSubmit(myData);
+      } else if (offline === "online") {
+        this.state.loading = true;
+        const myData = this.getSubmitData();
+        onlineSubmit(myData);
+      } else if (offline === "offlinePit") {
+        const myData = this.getSubmitData();
+        offlinePit(myData);
+      } else {
+        window.location.replace("/");
+      }
+    };
+  }
+
+  componentDidMount() {
+    window.ExitWithoutSave = () => this.state.exitWithoutSaving;
+  }
+
+  componentWillUnmount() {
+    window.ExitWithoutSave = null;
+  }
+
+  render() {
+    let form;
+    if (offline === "online") {
+      form = match;
+    } else if (offline === "offlinePit") {
+      form = pit;
+    } else if (offline === "tba"){
+      form = tba;
+    } else {
+      form = match;
     }
+    const handleClickOpen = () => {
+      this.setState({ open: true });
+    };
 
-    componentDidMount() {
-        window.ExitWithoutSave = () => this.state.exitWithoutSaving;
-    }
+    const handleClose = () => {
+      this.setState({ open: false });
+    };
 
-    componentWillUnmount() {
-        window.ExitWithoutSave = null;
-    }
+    const { classes } = this.props;
 
-    render() {
-        let form;
-        if (offline === "online") {
-            form = match;
-        } else if (offline === "offlinePit") {
-            form = pit;
-        } else {
-            form = match;
-        }
-        const handleClickOpen = () => {
-            this.setState({open: true});
-        };
+    return (
+      <div>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={handleClickOpen}
+          style={{ marginTop: "25px", marginBottom: "25px" }}
+        >
+          Go Home
+        </Button>
+        <Dialog
+          open={this.state.open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Exit Without Saving"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Exit this form without saving
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => window.location.replace("/")}
+              color="primary"
+            >
+              Yes
+            </Button>
+            <Button
+              onClick={() => this.setState({ open: false })}
+              color="primary"
+              autoFocus
+            >
+              No
+            </Button>
+          </DialogActions>
+        </Dialog>
 
-        const handleClose = () => {
-            this.setState({open: false});
-        };
+        <Typography variant="h5" color="inherit" style={{ paddingTop: "25px" }}>
+          {form.name}
+        </Typography>
 
-        return (
-            <div>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleClickOpen}
-                    style={{marginTop: "25px", marginBottom: "25px"}}
-                >
-                    Go Home
-                </Button>
-                <Dialog
-                    open={this.state.open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">
-                        {"Exit Without Saving"}
-                    </DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            Exit this form without saving
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button
-                            onClick={() => window.location.replace("/")}
-                            color="primary"
-                        >
-                            Yes
-                        </Button>
-                        <Button
-                            onClick={() => this.setState({open: false})}
-                            color="primary"
-                            autoFocus
-                        >
-                            No
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+        <FieldImage />
 
-                <Typography variant="h5" color="inherit" style={{paddingTop: "25px"}}>
-                    {form.name}
-                </Typography>
+        <Grid container spacing={2}>
 
-                {form.items.map((item, i) => {
-                    const Field = FieldTypes[item.type];
-                    if (!Field) {
-                        return (
-                            <div key={i}>
-                                <h4 style={{color: "red"}}>
-                                    Uh Oh - Field Type{" "}
-                                    <span style={{fontFamily: "monospace"}}>{item.type}</span>{" "}
-                                    does not exist or is in development.
-                                </h4>
-                            </div>
-                        );
-                    } else {
-                        return (
-                            <Field
-                                onChange={this.state.inputChangeHandlers[i]}
-                                value={this.state.inputs[i]}
-                                config={item}
-                                key={i}
-                            />
-                        );
-                    }
-                })}
+        {form.items.map((item, i) => {
+          const Field = FieldTypes[item.type];
+          if (!Field) {
+            return (
+              <div key={i}>
+                <h4 style={{ color: "red" }}>
+                  Uh Oh - Field Type{" "}
+                  <span style={{ fontFamily: "monospace" }}>{item.type}</span>{" "}
+                  does not exist or is in development.
+                </h4>
+              </div>
+            );
+          } else if (item.box) {
+            return (
+              <Grid item xs={6} key={i}>
+                <Field
+                  onChange={this.state.inputChangeHandlers[i]}
+                  value={this.state.inputs[i]}
+                  config={item}
+                  key={i}
+                />
+              </Grid>
+            );
+        }else {
+            return (
+              <Grid item xs={12} key={i}>
+                <Field
+                  onChange={this.state.inputChangeHandlers[i]}
+                  value={this.state.inputs[i]}
+                  config={item}
+                  key={i}
+                />
+              </Grid>
+            );
+          }
+        })}
+        </Grid>
 
-                <br/>
-                <br/>
+        <br />
+        <br />
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    disabled={this.getSubmitData().some((x) => x === undefined)}
-                    onClick={this.handleSubmit}
-                    style={{marginBottom: "25px"}}
-                >
-                    Submit
-                </Button>
-                {this.state.loading ? (
-                    <div/>
-                ) : (
-                    <CircularProgress style={{marginBottom: "25px"}}/>
-                )}
-                <ToastContainer/>
-            </div>
-        );
-    }
+        <Button
+          variant="contained"
+          disabled={this.getSubmitData().some((x) => x === undefined)}
+          onClick={this.handleSubmit}
+          style={{ marginBottom: "25px" }}
+          classes={{ disabled: classes.disabledButton }}
+        >
+          Submit
+        </Button>
+        {this.state.loading ? (
+          <div />
+        ) : (
+          <CircularProgress style={{ marginBottom: "25px" }} />
+        )}
+        <ToastContainer />
+      </div>
+    );
+  }
 }
 
-export default FormPage;
+export default withStyles(styles)(FormPage);

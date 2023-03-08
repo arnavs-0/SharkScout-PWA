@@ -1,0 +1,174 @@
+{
+  "items": [
+    {
+      "type": "header",
+      "label": "Pre-Match",
+      "variant": "h5",
+      "description": "Before Match Starts"
+    },
+    {
+      "type": "number",
+      "label": "Team Number",
+      "exportLabel": "Team Number"
+    },
+    {
+      "type": "number",
+      "label": "Match Number",
+      "exportLabel": "Match Number"
+    },
+    {
+      "type": "boolean",
+      "label": "Alliance",
+      "trueValue": "Red",
+      "falseValue": "Blue",
+      "trueColor": "Red",
+      "falseColor": "Blue"
+    },
+    {
+      "type": "text",
+      "label": "Scouter Name",
+      "exportLabel": "Scouter Name"
+    },
+    {
+      "type": "header",
+      "label": "Autonomous Period",
+      "variant": "h5",
+      "description": "Use the image of field as reference"
+    },
+    {
+      "type": "radio",
+      "label": "Starting Position",
+      "options": ["1", "2", "3", "4"]
+    },
+    {
+      "type": "counter",
+      "label": "Lower-Hub Cargo Scored",
+      "exportLabel": "Lower-Hub Shots Auton"
+    },
+    {
+      "type": "counter",
+      "label": "Upper-Hub Shots Scored",
+      "exportLabel": "Upper-Hub Shots Auton"
+    },
+    {
+      "type": "header",
+      "label": "Teleop Period",
+      "variant": "h5"
+    },
+    {
+      "type": "counter",
+      "label": "Lower-Hub Cargo Scored",
+      "exportLabel": "Lower-Hub Shots teleop"
+    },
+    {
+      "type": "counter",
+      "label": "Upper-Hub Cargo Scored",
+      "exportLabel": "Upper-Hub Shots teleop"
+    },
+    {
+      "type": "header",
+      "label": "Shooting Position",
+      "variant": "h6",
+      "description": "Where did the robot shoot majority of the time?"
+    },
+    {
+      "type": "checkbox"
+    },
+    {
+      "type": "header",
+      "label": "End Game",
+      "variant": "h5"
+    },
+    {
+      "type": "radio",
+      "label": "Final Rung Reached",
+      "options": ["Traversal", "High", "Mid", "Low", "None"]
+    },
+    {
+      "type": "header",
+      "label": "Climb Speed",
+      "variant": "h6",
+      "description": "(from time to align to climb complete)"
+    },
+    {
+      "type": "radio",
+      "options": ["Fast", "Medium", "Slow", "N/A"]
+    },
+    {
+      "type": "header",
+      "label": "Post-Match",
+      "variant": "h5",
+      "description": "Fill out all fields, if the field is not applicable, fill it with N/A"
+    },
+    {
+      "type": "header",
+      "label": "Ball Intake Rating",
+      "variant": "h6"
+    },
+    {
+      "type": "radio",
+      "options": [
+        "0 - no intake",
+        "1 - slow speed",
+        "2 - medium speed",
+        "3 - fast speed"
+      ]
+    },
+    {
+      "type": "boolean",
+      "label": "Can Hold 2 Balls?",
+      "exportLabel": "Intake 2 Balls"
+    },
+    {
+      "type": "radio",
+      "label": "Under Defense...",
+      "options": [
+        "0 - Was not under heavy defense",
+        "1 - Cannot score under heavy defense",
+        "2 - Scores much less than usual",
+        "3 - Continues to score normally"
+      ],
+      "exportLabel": "Defense Rating"
+    },
+    {
+      "type": "text-area",
+      "label": "Other notes",
+      "helperText": "Anything else the robot did or has?",
+      "exportLabel": "Notes"
+    },
+    {
+      "type": "radio",
+      "label": "Percent time the robot played defense",
+      "options": ["100%", "75%", "50%", "25%", "0%"],
+      "exportLabel": "Defense"
+    },
+    {
+      "type": "radio",
+      "label": "Defense Rating",
+      "options": [
+        "0 - did not play defense",
+        "1 - ineffective defense",
+        "2 - prevented some cargo",
+        "3 - prevented most cargos or climbs"
+      ],
+      "exportLabel": "Defense Rating"
+    },
+    {
+      "type": "text-area",
+      "label": "Explain what Defense the Robot Played",
+      "helperText": "Block Shots, Maintain Cargo, etc.",
+      "exportLabel": "Notes"
+    },
+    {
+      "type": "radio",
+      "label": "Overall Robot Rating",
+      "options": [
+        "1 - does not contribute much to scoring",
+        "1.5 - not a strong scorer",
+        "2 - contribute to score or elite defense; must have traversal climb",
+        "2.5 - highly competitive robot",
+        "3 - likely captain on 1st or 2nd alliance"
+      ]
+    }
+  ]
+}
