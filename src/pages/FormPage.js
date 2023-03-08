@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import match from "../modules/assets/forms/match.json";
 import pit from "../modules/assets/forms/pit.json";
+import tba from "../modules/assets/forms/tba.json";
 import { ToastContainer } from "react-toastify";
 import { offlinePit, offlineSubmit, onlineSubmit } from "../api/API";
 import { offline } from "../modules/LocalDB";
@@ -49,6 +50,8 @@ class FormPage extends Component {
       form = pit;
     } else if (offline === "offline") {
       form = match;
+    } else if (offline === "tba"){
+      form = tba;
     }
     this.handleFieldChange = (i, new_value) => {
       const inputs = this.state.inputs.concat();
@@ -87,7 +90,7 @@ class FormPage extends Component {
     };
 
     this.handleSubmit = () => {
-      if (offline === "offline") {
+      if (offline === "offline" || offline === "tba") {
         console.log(this.getSubmitData());
         var myData = this.getSubmitData();
         console.log(myData[0]);
@@ -119,6 +122,8 @@ class FormPage extends Component {
       form = match;
     } else if (offline === "offlinePit") {
       form = pit;
+    } else if (offline === "tba"){
+      form = tba;
     } else {
       form = match;
     }

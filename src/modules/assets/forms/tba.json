@@ -1,0 +1,236 @@
+{
+    "items": [
+      {
+        "type": "header",
+        "label": "Pre-Match",
+        "variant": "h5",
+        "description": "Before Match Starts"
+      },
+      {
+        "type": "number",
+        "label": "Team Number",
+        "exportLabel": "Team Number"
+      },
+      {
+        "type": "number",
+        "label": "Match Number",
+        "exportLabel": "Match Number"
+      },
+      {
+        "type": "boolean",
+        "label": "Alliance",
+        "trueValue": "Red",
+        "falseValue": "Blue",
+        "trueColor": "Red",
+        "falseColor": "Blue"
+      },
+      {
+        "type": "text",
+        "label": "Scouter Name",
+        "exportLabel": "Scouter Name"
+      },
+      {
+        "type": "radio",
+        "label": "Starting Position",
+        "options": ["1", "2", "3", "Other"]
+      },
+      {
+        "type": "header",
+        "label": "Autonomous Period",
+        "variant": "h5",
+        "description": "Use the image of field as reference"
+      },
+      {
+        "type": "header",
+        "label": "Game Piece Scoring",
+        "variant": "h6"
+      },
+      {
+        "type": "header",
+        "label": "Cones",
+        "variant": "h6",
+        "box": true
+      },
+      {
+        "type": "header",
+        "label": "Cubes",
+        "variant": "h6",
+        "box": true
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Lower Node",
+        "exportLabel": "Lower Node Cone Auton"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Lower Node",
+        "exportLabel": "Lower Node Cube Auton"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Middle Node",
+        "exportLabel": "Middle Node Cone Auton"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Middle Node",
+        "exportLabel": "Middle Node Cube Auton"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Upper Node",
+        "exportLabel": "Upper Node Cone Auton"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Upper Node",
+        "exportLabel": "Upper Node Cube Auton"
+      },
+      {
+        "type": "radio",
+        "label": "Charge Station",
+        "options": ["Docked", "Engaged", "Failed", "Not Attempted"]
+      },
+      {
+        "type": "text-area",
+        "label": "Autonomous Notes",
+        "helperText": "Odd scoring placement, Potential path crossing, etc.",
+        "exportLabel": "Auton Notes"
+      },
+      {
+        "type": "header",
+        "label": "Teleop Period",
+        "variant": "h5"
+      },
+      {
+        "type": "header",
+        "label": "Game Piece Scoring",
+        "variant": "h6"
+      },
+      {
+        "type": "header",
+        "label": "Cones",
+        "variant": "h6",
+        "box": true
+      },
+      {
+        "type": "header",
+        "label": "Cubes",
+        "variant": "h6",
+        "box": true
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Lower Node",
+        "exportLabel": "Lower Node Cone Teleop"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Lower Node",
+        "exportLabel": "Lower Node Cube Teleop"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Middle Node",
+        "exportLabel": "Middle Node Cone Teleop"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Middle Node",
+        "exportLabel": "Middle Node Cube Teleop"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Upper Node",
+        "exportLabel": "Upper Node Cone Teleop"
+      },
+      {
+        "type": "counter",
+        "box": true,
+        "label": "Upper Node",
+        "exportLabel": "Upper Node Cube Teleop"
+      },
+      {
+        "type": "radio",
+        "label": "Game Piece Pickup (On Average)",
+        "options": ["Double Substation", "Floor", "Both", "N/A"]
+      },
+      {
+        "type": "header",
+        "label": "Endgame",
+        "variant": "h5"
+      }, 
+      {
+        "type": "radio",
+        "label": "Charge Station",
+        "options": ["Docked", "Engaged", "Failed", "Not Attempted"]
+      },
+      {
+        "type": "radio",
+        "label": "Station Side?",
+        "options": ["Sides", "Middle", "N/A"]
+      },
+      {
+        "type": "header",
+        "label": "Post Match",
+        "variant": "h5"
+      },
+      {
+        "type": "radio",
+        "label": "Under Defense...",
+        "options": [
+          "0 - Was not under heavy defense",
+          "1 - Cannot score under heavy defense",
+          "2 - Scoring impacted by defense",
+          "3 - Continues to score normally"
+        ],
+        "exportLabel": "Defense Rating"
+      },
+      {
+        "type": "text-area",
+        "label": "Other notes",
+        "helperText": "Anything else the robot did or has?",
+        "exportLabel": "Notes"
+      },
+      {
+        "type": "radio",
+        "label": "Defense Rating",
+        "options": [
+          "0 - did not play defense",
+          "1 - ineffective defense",
+          "2 - prevented some cargo",
+          "3 - prevented significant scoring"
+        ],
+        "exportLabel": "Defense Rating"
+      },
+      {
+        "type": "text-area",
+        "label": "Explain what Defense the Robot Played",
+        "helperText": "Block Shots, Maintain Cargo, etc.",
+        "exportLabel": "Notes"
+      },
+      {
+        "type": "radio",
+        "label": "Overall Robot Rating",
+        "options": [
+          "1 - does not contribute much to scoring",
+          "1.5 - not a strong scorer or defender",
+          "2 - contribute to score or elite defense",
+          "2.5 - highly competitive robot",
+          "3 - likely captain on 1st or 2nd alliance"
+        ]
+      }
+    ]
+  }  
