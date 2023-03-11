@@ -120,10 +120,17 @@ export default function TBALoader() {
           localStorage.setItem("matches", JSON.stringify(reformatted));
           localStorage.setItem("event_code", Config.tba_eventid);
           localStorage.removeItem("teams");
-          window.dispatchEvent(new Event('teams'))
-          loadMatches("Loaded ✅");
-          setLoading(false);
-          setDisabled(true);
+          if (localStorage.getItem("matches") !== "[]") {
+            window.dispatchEvent(new Event('teams'))
+            loadMatches("Loaded ✅");
+            setLoading(false);
+            setDisabled(true);
+          } else {
+            loadMatches("Error Loading ❌");
+            setLoading(false);
+            setDisabled(false);
+          }
+
         });
     } else {
       setDisabled(true);
