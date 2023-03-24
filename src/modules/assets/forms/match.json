@@ -15,15 +15,9 @@
       "exportLabel": "Scouter Name"
     },
     {
-      "type": "radio",
-      "label": "Starting Position",
-      "options": ["1", "2", "3", "Other"]
-    },
-    {
       "type": "header",
       "label": "Autonomous Period",
-      "variant": "h5",
-      "description": "Use the image of field as reference"
+      "variant": "h5"
     },
     {
       "type": "header",
@@ -82,12 +76,6 @@
       "type": "radio",
       "label": "Charge Station",
       "options": ["Docked", "Engaged", "Failed", "Not Attempted"]
-    },
-    {
-      "type": "text-area",
-      "label": "Autonomous Notes",
-      "helperText": "Odd scoring placement, Potential path crossing, etc.",
-      "exportLabel": "Auton Notes"
     },
     {
       "type": "header",
@@ -161,11 +149,6 @@
       "type": "radio",
       "label": "Charge Station",
       "options": ["Docked", "Engaged", "Failed", "Not Attempted"]
-    },
-    {
-      "type": "radio",
-      "label": "Station Side?",
-      "options": ["Sides", "Middle", "N/A"]
     },
     {
       "type": "header",
