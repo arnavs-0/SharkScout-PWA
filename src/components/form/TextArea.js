@@ -10,10 +10,14 @@ const styles = (theme) => ({
 });
 
 class TextArea extends Component {
+  state = {
+    characterCount: 0,
+  };
   constructor(props) {
     super(props);
     this.handleChange = (ev) => {
       this.props.onChange(ev.target.value);
+      this.setState({ characterCount: ev.target.value.length });
     };
   }
 
@@ -31,6 +35,7 @@ class TextArea extends Component {
           }}
           inputProps={{
             className: classes.root,
+            maxLength: 100,
           }}
           label={config.label}
           value={value}
@@ -38,7 +43,7 @@ class TextArea extends Component {
           margin="normal"
           variant="outlined"
           multiline={true}
-          helperText={config.helperText}
+          helperText={config.helperText + " " + this.state.characterCount + "/100 characters"}
         />
       </div>
     );

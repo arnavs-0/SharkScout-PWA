@@ -17,7 +17,6 @@ import { ToastContainer } from "react-toastify";
 import { offlinePit, offlineSubmit, onlineSubmit } from "../api/API";
 import { offline } from "../modules/LocalDB";
 import { withStyles } from "@mui/styles";
-import FieldImage from "../components/form/FieldImage";
 
 function requireAll(r) {
   return r.keys().map(r);
@@ -181,8 +180,6 @@ class FormPage extends Component {
         <Typography variant="h5" color="inherit" style={{ paddingTop: "25px" }}>
           {form.name}
         </Typography>
-
-        <FieldImage />
 
         <Grid container spacing={2}>
 

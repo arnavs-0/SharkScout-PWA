@@ -2,7 +2,7 @@ import React from "react";
 import { LoadingButton } from "@mui/lab";
 import axios from "axios";
 import Config from "../utils/config.json";
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 
 export default function TBALoader() {
   const [loading, setLoading] = React.useState(false);
@@ -62,7 +62,9 @@ export default function TBALoader() {
   async function loadMatch() {
     if (
       localStorage.getItem("event_code") !== null ||
-      localStorage.getItem("event_code") !== Config.tba_eventid
+      localStorage.getItem("event_code") !== Config.tba_eventid ||
+      localStorage.getItem("matches") === null ||
+      localStorage.getItem("matches") === "[]"
     ) {
       setLoading(true);
       let config = {
@@ -120,6 +122,7 @@ export default function TBALoader() {
           localStorage.setItem("matches", JSON.stringify(reformatted));
           localStorage.setItem("event_code", Config.tba_eventid);
           localStorage.removeItem("teams");
+          console.log(localStorage.getItem("matches"))
           if (localStorage.getItem("matches") !== "[]") {
             window.dispatchEvent(new Event('teams'))
             loadMatches("Loaded ✅");
@@ -136,6 +139,14 @@ export default function TBALoader() {
       setDisabled(true);
       loadMatches("Matches Already Loaded");
     }
+  }
+
+  function removeTeams(){
+    localStorage.removeItem("teams");
+    localStorage.removeItem("matches");
+    setDisabled(false);
+    loadTeams("");
+    loadMatches("");
   }
 
   return (
@@ -156,6 +167,9 @@ export default function TBALoader() {
       <Typography variant="p" style={{ fontWeight: "bold" }}>
         Matches Loaded: {matches}
       </Typography>
+      <br/>
+      <br/>
+      <Button variant="contained" color="error" onClick={removeTeams}>Delete Local Matches</Button>
     </div>
   );
 }
