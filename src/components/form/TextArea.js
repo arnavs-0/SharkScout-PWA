@@ -16,7 +16,7 @@ class TextArea extends Component {
   constructor(props) {
     super(props);
     this.handleChange = (ev) => {
-      this.props.onChange(ev.target.value);
+      this.props.onChange(ev.target.value.replace(/[^a-zA-Z0-9 ]/g, ""));
       this.setState({ characterCount: ev.target.value.length });
     };
   }
