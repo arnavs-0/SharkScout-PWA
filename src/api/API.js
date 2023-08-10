@@ -98,15 +98,15 @@ export function offlineSubmit(data) {
   //console.log(reformat);
   setQRCode(JSON.stringify(reformat));
   //setNotesQRCode(JSON.stringify(notesReformat));
-  const fileName = "file";
+  const fileName = `${data[0].match}-${data[0].team}}`;
   const json = JSON.stringify(reformat);
   const blob = new Blob([json], { type: "application/json" });
   const href = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = href;
-  link.download = fileName + ".json";
+  localStorage.setItem("filename", fileName);
   document.body.appendChild(link);
-  // link.click();
+  //link.click();
   removeItem("offline");
   goToQRCode();
 
@@ -224,7 +224,7 @@ export function onlineSubmit(data) {
   }
 
   db.collection(Config.firebase_node)
-    .doc("quals")
+    .doc("iri")
     .collection(reformat.team + "-" + reformat.match)
     .doc(reformat.uid)
     .set(reformat)
