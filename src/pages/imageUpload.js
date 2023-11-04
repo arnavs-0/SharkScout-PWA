@@ -53,7 +53,7 @@ export default function ReactFirebaseFileUpload() {
     }
     images.forEach((image) => {
       const uploadTask = storage
-        .ref(`goon/${number}/${image.name}`)
+        .ref(`bloom/${number}/${image.name}`)
         .put(image);
       promises.push(uploadTask);
       uploadTask.on(
@@ -69,12 +69,12 @@ export default function ReactFirebaseFileUpload() {
         },
         async () => {
           await storage
-            .ref(`goon/${number}`)
+            .ref(`bloom/${number}`)
             .child(image.name)
             .getDownloadURL()
             .then((urls) => {
               db.ref(
-                `goon/${number}/${Math.round(Math.random() * 1000)}`
+                `bloom/${number}/${Math.round(Math.random() * 1000)}`
               ).set({
                 url: urls,
               });
